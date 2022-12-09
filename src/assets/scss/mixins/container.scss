@@ -1,0 +1,23 @@
+@use '../common/variables' as *;
+@use './media' as *;
+
+@mixin container {
+  min-width: map-get($widths, sm);
+  padding-right: $gap-sm;
+  padding-left: $gap-sm;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+
+  @include media-min(md) {
+    min-width: map-get($widths, md);
+    padding-right: $gap-md;
+    padding-left: $gap-md;
+  }
+  @include media-min(lg) {
+    min-width: map-get($widths, lg);
+    padding-right: $gap-lg;
+    padding-left: $gap-lg;
+  }
+  @include media-min(xl) { width: map-get($widths, xl); }
+}
