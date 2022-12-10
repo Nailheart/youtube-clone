@@ -1,0 +1,17 @@
+@use "assets/scss/mixins" as *;
+
+.app {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  min-height: 100vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  gap: 0 16px;
+
+  @include media-min(md) {
+    gap: 0 24px;
+  }
+}

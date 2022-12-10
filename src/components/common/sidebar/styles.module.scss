@@ -1,0 +1,10 @@
+@use "assets/scss/mixins" as *;
+
+.sidebar {
+  @include invisible-scrollbar;
+  padding: 0 16px;
+
+  @include media-min(md) {
+    padding: 0 24px;
+  }
+}
