@@ -1,5 +1,27 @@
-:root {}
-body {}
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-grey-1: #ccc;
+  --color-grey-2: #aaa;
+  --color-grey-3: #909090;
+  --color-grey-4: #717171;
+  --color-grey-5: #606060;
+  --color-red: #f00;
+  --color-medium-red: #c00;
+  --color-light-blue: #3ea6ff;
+  --color-dark-blue: #065fd4;
+  --color-light-green: #2ba640;
+  --color-dark-green: #107516;
+  --color-yellow: #fbc02d;
+  --color-text-primary: #0f0f0f;
+  --color-text-secondary: #606060;
+  --transition: .2s;
+}
+
+body {
+  color: var(--color-primary-text);
+  font-size: 16px;
+}
 
 img {
   display: block;
