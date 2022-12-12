@@ -1,6 +1,6 @@
 @use "assets/scss/mixins" as *;
 
-.app {
+.layout {
   display: grid;
   grid-template-rows: min-content 1fr;
   min-height: 100vh;
