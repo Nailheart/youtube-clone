@@ -1,4 +1,5 @@
 type IconName =
+  | 'logo' 
   | 'home' 
   | 'search'
   | 'cross'

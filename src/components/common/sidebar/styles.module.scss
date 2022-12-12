@@ -2,9 +2,24 @@
 
 .sidebar {
   @include invisible-scrollbar;
-  padding: 0 16px;
+  
+  min-width: 240px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
 
-  @include media-min(md) {
-    padding: 0 24px;
+.link {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  gap: 0 24px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  transition: var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-light);
   }
 }
