@@ -1,0 +1,1 @@
+export { fetchFromAPI } from './fetch-from-api/fetch-from-api';

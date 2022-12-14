@@ -2,10 +2,15 @@
 
 .sidebar {
   @include invisible-scrollbar;
-  
+
   min-width: 240px;
+  height: calc(100vh - var(--header-height));
   padding: 0 12px;
+  background-color: var(--color-grey-100);
   box-sizing: border-box;
+  position: sticky;
+  top: var(--header-height);
+  left: 0;
 }
 
 .link {
