@@ -7,15 +7,12 @@ import styles from './styles.module.scss';
 const Feed = () => {
   const videos = useLoaderData() as PlaylistVideosResponseDto;
 
-  console.log(videos);
-  
-
   return (
     <div className={styles.feed}>
       {videos.items.map((item: PlaylistVideoResponseDto) => (
         <VideoCard
-          key={item.id.id}
-          videoId={item.id.id}
+          key={item.id.videoId}
+          videoId={item.id.videoId}
           channelId={item.snippet.channelId}
           img={item.snippet.thumbnails.high.url}
           title={item.snippet.title}

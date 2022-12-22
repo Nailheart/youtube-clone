@@ -2,7 +2,7 @@ type PlaylistVideoResponseDto = {
   kind: string,
   id: {
     kind: string,
-    id: string
+    videoId: string
   },
   snippet: {
     publishedAt: string,
