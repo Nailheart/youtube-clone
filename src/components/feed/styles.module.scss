@@ -1,7 +1,8 @@
+@use "assets/scss/mixins" as *;
+
 .feed {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 40px 16px;
+  @include movie-list;
+  
   padding-right: 24px;
   padding-bottom: 40px;
 }
