@@ -3,7 +3,7 @@ enum AppRoute {
   CHANNEL_ID = '/channel/:id',
   VIDEO_ID = '/video/:id',
   SEARCH_TERM = '/search/:searchTerm',
-  ANY = '*',
+  NO_MATCH  = '*',
 }
 
 export { AppRoute };
