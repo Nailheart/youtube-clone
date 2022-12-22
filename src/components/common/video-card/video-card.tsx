@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { sanitizeHTML } from 'helpers/helpers';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -18,7 +19,7 @@ const VideoCard: FC<Props> = ({ videoId, channelId, img, title, channelTitle }) 
       </Link>
       <div className={styles.cardDescription}>
         <Link className={styles.cardTitle} to={`/video/${videoId}`} title={title}>
-          {title.slice(0, 80)}
+          {sanitizeHTML(title.slice(0, 80))}
         </Link>
         <Link className={styles.cardChannelTitle} to={`/channel/${channelId}`}>
           {channelTitle}
