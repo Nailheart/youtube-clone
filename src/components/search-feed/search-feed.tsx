@@ -17,6 +17,7 @@ const SearchFeed = () => {
           img={item.snippet.thumbnails.high.url}
           title={item.snippet.title}
           channelTitle={item.snippet.channelTitle}
+          publishTime={item.snippet.publishedAt}
         />
       ))}
     </div>

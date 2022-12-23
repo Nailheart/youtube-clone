@@ -1,7 +1,7 @@
 import sanitizeHtml from 'sanitize-html';
 
 const sanitizeHTML = (html: string): string => {
-  return sanitizeHtml(html, {});
+  return sanitizeHtml(html);
 };
 
 export { sanitizeHTML };
