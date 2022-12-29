@@ -3,3 +3,7 @@
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 }
+
+@mixin thin-scrollbar {
+  scrollbar-width: thin;
+}

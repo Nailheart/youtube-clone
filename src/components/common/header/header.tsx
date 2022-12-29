@@ -1,13 +1,23 @@
+import { FC } from 'react';
 import { AppRoute } from 'common/enums/enums';
 import { Icon, Link } from 'components/common/common';
 import { Search } from './components/components';
 import styles from './styles.module.scss';
 
-const Header = () => {
+type Props = {
+  sidebarIsOpen: boolean;
+  toggleSidebar: (showSidebar: boolean) => void;
+}
+
+const Header: FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
+  const handleToggleSidebar = () => {
+    toggleSidebar(!sidebarIsOpen);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.logoWrapper}>
-        <button className={styles.toggle}>
+        <button  className={styles.toggle} onClick={handleToggleSidebar}>
           <Icon name="burger" />
         </button>
 
@@ -16,7 +26,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <Search/>
+      <Search />
     </header>
   );
 };

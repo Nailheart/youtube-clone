@@ -2,7 +2,5 @@
 
 .feed {
   @include movie-list;
-  
-  padding-right: 24px;
-  padding-bottom: 40px;
+  width: 100%;
 }

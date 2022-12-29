@@ -7,11 +7,10 @@
 }
 
 .container {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  gap: 0 16px;
+  display: flex;
+}
 
-  @include media-min(md) {
-    gap: 0 24px;
-  }
+.content {
+  flex-grow: 1;
+  padding: 12px 24px;
 }
