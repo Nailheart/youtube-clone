@@ -24,6 +24,7 @@ import { ReactComponent as Settings } from 'assets/img/icons/settings.svg';
 import { ReactComponent as Search } from 'assets/img/icons/search.svg';
 import { ReactComponent as Cross } from 'assets/img/icons/cross.svg';
 import { ReactComponent as Burger } from 'assets/img/icons/burger.svg';
+import { ReactComponent as Dots } from 'assets/img/icons/dots.svg';
 
 const listIcons: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {
   logo: Logo,
@@ -50,6 +51,7 @@ const listIcons: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {
   search: Search,
   cross: Cross,
   burger: Burger,
+  dots: Dots,
 }
 
 type Props = {

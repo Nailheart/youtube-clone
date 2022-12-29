@@ -22,6 +22,7 @@ type IconName =
   | 'settings'
   | 'search'
   | 'cross'
-  | 'burger';
+  | 'burger'
+  | 'dots';
 
 export { type IconName };

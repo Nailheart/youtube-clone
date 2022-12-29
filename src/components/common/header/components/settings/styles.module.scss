@@ -1,0 +1,22 @@
+.setting {
+  margin-left: 20px;
+}
+
+.dotsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  box-sizing: content-box;
+  transition: var(--transition);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible { background-color: var(--color-light); }
+  &:active { background-color: var(--color-grey-1); }
+}

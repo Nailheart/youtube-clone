@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AppRoute } from 'common/enums/enums';
 import { Icon, Link } from 'components/common/common';
-import { Search } from './components/components';
+import { Search, Settings } from './components/components';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -27,6 +27,7 @@ const Header: FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
       </div>
 
       <Search />
+      <Settings />
     </header>
   );
 };
