@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { AppRoute } from 'common/enums/enums';
 import { Header, Sidebar } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const Layout = () => {
   const location = useLocation();
-  const sidebarIsModal = location.pathname !== AppRoute.ROOT;
+  const sidebarIsModal = location.pathname.split('/').includes('video'); // todo
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
 
   const handleToggleSidebar = (showSidebar: boolean) => {

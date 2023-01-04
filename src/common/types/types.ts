@@ -2,6 +2,11 @@ export {
   type PlaylistVideoResponseDto,
   type PlaylistVideosResponseDto,
 } from './playlist/playlist';
+export {
+  type SearchChannelResponseDto,
+  type SearchResponseDto,
+  type SearchVideoResponseDto,
+} from './search/search';
 export { 
   type IconName,
   type NavigationItem,

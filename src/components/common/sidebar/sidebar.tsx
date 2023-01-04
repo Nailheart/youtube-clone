@@ -34,16 +34,16 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
         </div>
 
         <div className={styles.modalContent}>
-          {NAVIGATION_ITEMS.map(item => (
-            <div key={item.navigationGroup} className={styles.navigationGroup}>
+          {NAVIGATION_ITEMS.map((item, index) => (
+            <div key={index} className={styles.navigationGroup}>
               {Boolean(item.navigationGroup) && (
                 <h3 className={styles.groupTitle}>{item.navigationGroup}</h3>
               )}
               
               <ul className={styles.links}>
                 {item.links.map((item, index) => (
-                  <li>
-                    <Link key={index} className={styles.link} to={item.path}>
+                  <li key={index}>
+                    <Link className={styles.link} to={item.path}>
                       <Icon name={item.icon} />
                       {item.title}
                     </Link>
@@ -59,16 +59,16 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
     </div>
   ) : (
     <aside className={clsx(styles.sidebar, !sidebarIsOpen && styles.sidebarHidden)}>
-      {NAVIGATION_ITEMS.map(item => (
-        <div className={styles.navigationGroup}>
+      {NAVIGATION_ITEMS.map((item, index) => (
+        <div key={index} className={styles.navigationGroup}>
           {Boolean(item.navigationGroup) && (
             <h3 className={styles.groupTitle}>{item.navigationGroup}</h3>
           )}
           
           <ul className={styles.links}>
             {item.links.map((item, index) => (
-              <li>
-                <Link key={index} className={styles.link} to={item.path}>
+              <li key={index}>
+                <Link className={styles.link} to={item.path}>
                   <Icon name={item.icon} />
                   {item.title}
                 </Link>

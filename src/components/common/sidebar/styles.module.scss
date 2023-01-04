@@ -61,6 +61,7 @@
 .sidebar {
   @include invisible-scrollbar;
 
+  flex-shrink: 0;
   width: 240px;
   height: calc(100vh - var(--header-height));
   background-color: var(--color-white);

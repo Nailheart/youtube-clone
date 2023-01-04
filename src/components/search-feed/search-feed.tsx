@@ -1,25 +1,15 @@
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
-import { PlaylistVideoResponseDto, PlaylistVideosResponseDto } from 'common/types/types';
+import { SearchResponseDto } from 'common/types/types';
 import { fetchFromAPI } from 'helpers/helpers';
-import { VideoCard } from 'components/common/common';
+import { CardList } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const SearchFeed = () => {
-  const videos = useLoaderData() as PlaylistVideosResponseDto;
+  const { items } = useLoaderData() as SearchResponseDto;
 
   return (
     <div className={styles.searchFeed}>
-      {videos.items.map((item: PlaylistVideoResponseDto) => (
-        <VideoCard
-          key={item.id.videoId}
-          videoId={item.id.videoId}
-          channelId={item.snippet.channelId}
-          img={item.snippet.thumbnails.high.url}
-          title={item.snippet.title}
-          channelTitle={item.snippet.channelTitle}
-          publishTime={item.snippet.publishedAt}
-        />
-      ))}
+      <CardList items={items} />
     </div>
   );
 };

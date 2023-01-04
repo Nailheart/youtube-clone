@@ -1,6 +1,3 @@
-@use "assets/scss/mixins" as *;
-
 .feed {
-  @include movie-list;
   width: 100%;
 }
