@@ -1,6 +1,8 @@
-import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { sanitizeHTML, getFormattedDate } from 'helpers/helpers';
+import { AppRoute } from 'common/enums/enums';
+import { FC } from 'common/types/types';
+import { insertUrlParams, sanitizeHTML, getFormattedDate } from 'helpers/helpers';
+import { Link } from 'components/common/common';
+import VideoPlaceholder from 'assets/img/video_placeholder.jpg';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -15,17 +17,28 @@ type Props = {
 const VideoCard: FC<Props> = ({ videoId, channelId, img, title, channelTitle, publishTime }) => {
   return (
     <div className={styles.card}>
-      <Link to={`/video/${videoId}`}>
-        <img className={styles.cardImg} src={img} alt={title} />
+      <Link to={insertUrlParams(AppRoute.VIDEO_ID, {id: videoId})}>
+        <img 
+          className={styles.cardImg}
+          src={img ?? VideoPlaceholder}
+          alt={title}
+        />
       </Link>
       <div className={styles.cardDescription}>
-        <Link className={styles.cardTitle} to={`/video/${videoId}`} title={title}>
+        <Link 
+          className={styles.cardTitle}
+          to={insertUrlParams(AppRoute.VIDEO_ID, {id: videoId})}
+          title={title}
+        >
           {sanitizeHTML(title.slice(0, 80))}
         </Link>
-        <Link className={styles.cardChannelTitle} to={`/channel/${channelId}`}>
+        <Link 
+          className={styles.textSecondary}
+          to={insertUrlParams(AppRoute.CHANNEL_ID, {id: channelId})}
+        >
           {channelTitle}
         </Link>
-        <span className={styles.cardPublishTime}>{getFormattedDate(publishTime, 'distance')} ago</span>
+        <span className={styles.textSecondary}>{getFormattedDate(publishTime, 'distance')} ago</span>
       </div>
     </div>
   );

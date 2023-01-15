@@ -1,5 +1,5 @@
-import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
-import { SearchResponseDto } from 'common/types/types';
+import { LoaderFunctionArgs, SearchResponseDto } from 'common/types/types';
+import { useLoaderData  } from 'hooks/hooks';
 import { fetchFromAPI } from 'helpers/helpers';
 import { CardList } from 'components/common/common';
 import styles from './styles.module.scss';

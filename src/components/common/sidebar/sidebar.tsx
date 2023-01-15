@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { clsx } from 'clsx';
+import { clsx } from 'helpers/helpers';
 import { AppRoute } from 'common/enums/enums';
+import { FC } from 'common/types/types';
 import { Icon, Link } from 'components/common/common';
 import { NAVIGATION_ITEMS } from './constants';
 import styles from './styles.module.scss';

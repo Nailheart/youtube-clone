@@ -1,5 +1,5 @@
-import { ChangeEventHandler, FC, FormEventHandler, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, FormEventHandler, ChangeEventHandler } from 'common/types/types';
+import { useNavigate, useState } from 'hooks/hooks';
 import { Icon } from 'components/common/common';
 import styles from './styles.module.scss';
 

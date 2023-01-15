@@ -3,11 +3,12 @@
   grid-template-columns: 3fr 1fr;
   align-items: flex-start;
   gap: 0 24px;
+  padding: 15px 24px 30px;
 }
 
 .playerWrapper {
   width: 100%;
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  padding-top: 56.25%;
   position: relative;
 }
 

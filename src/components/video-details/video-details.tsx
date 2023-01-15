@@ -1,6 +1,6 @@
-import ReactPlayer from "react-player/youtube";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-import { VideoDetailsResponseDto } from "common/types/types";
+import ReactPlayer from "react-player/youtube"; // TODO: create component player ?
+import { LoaderFunctionArgs, VideoDetailsResponseDto } from "common/types/types";
+import { useLoaderData } from "hooks/hooks";
 import { fetchFromAPI } from "helpers/helpers";
 import styles from './styles.module.scss';
 
