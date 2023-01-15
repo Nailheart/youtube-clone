@@ -1,28 +1,28 @@
 type SearchChannelResponseDto = {
-  kind: string,
+  kind: string;
   id: {
-    kind: string,
-    channelId: string
+    kind: string;
+    channelId: string;
   },
   snippet: {
-    publishedAt: string,
-    channelId: string,
-    title: string,
-    description: string,
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
     thumbnails: {
       default: {
-        url: string
+        url: string;
       },
       medium: {
-        url: string
+        url: string;
       },
       high: {
-        url: string
+        url: string;
       }
     },
-    channelTitle: string,
-    liveBroadcastContent: string,
-    publishTime: string
+    channelTitle: string;
+    liveBroadcastContent: string;
+    publishTime: string;
   }
 };
 

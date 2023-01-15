@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { SearchChannelResponseDto, SearchVideoResponseDto } from 'common/types/types';
+import { FC, SearchChannelResponseDto, SearchVideoResponseDto } from 'common/types/types';
 import { VideoCard, ChannelCard } from 'components/common/common';
 import styles from './styles.module.scss';
 

@@ -1,5 +1,4 @@
-import { FC, SVGProps } from 'react';
-import { IconName } from 'common/types/types';
+import { IconName, FC, SVGProps } from 'common/types/types';
 import { ReactComponent as Logo } from 'assets/img/icons/logo.svg';
 import { ReactComponent as Home } from 'assets/img/icons/home.svg';
 import { ReactComponent as Shorts } from 'assets/img/icons/shorts.svg';

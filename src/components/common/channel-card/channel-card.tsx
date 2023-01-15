@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { FC } from 'common/types/types';
 import styles from './styles.module.scss';
 
 type Props = {

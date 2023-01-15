@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { AppRoute } from 'common/enums/enums';
+import { FC } from 'common/types/types';
 import { Icon, Link } from 'components/common/common';
 import { Search, Settings } from './components/components';
 import styles from './styles.module.scss';

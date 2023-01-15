@@ -1,9 +1,16 @@
-type SearchVideoResponseDto = {
+type VideoId = {
   kind: string;
-  id: {
-    kind: string;
-    videoId: string;
-  },
+  videoId: string;
+};
+
+type PlaylistId = {
+  kind: string;
+  playlistId: string;
+};
+
+type ChannelVideoResponseDto = {
+  kind: string;
+  id: VideoId | PlaylistId;
   snippet: {
     publishedAt: string;
     channelId: string;
@@ -32,4 +39,4 @@ type SearchVideoResponseDto = {
   }
 };
 
-export { type SearchVideoResponseDto };
+export { type ChannelVideoResponseDto };
