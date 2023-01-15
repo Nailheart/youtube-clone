@@ -17,7 +17,7 @@
 }
 
 .modalSidebar {
-  width: 240px;
+  width: var(--sidebar-width);
   height: 100%;
   background-color: var(--color-white);
   box-sizing: border-box;
@@ -61,19 +61,21 @@
 .sidebar {
   @include invisible-scrollbar;
 
-  flex-shrink: 0;
-  width: 240px;
+  width: var(--sidebar-width);
   height: calc(100vh - var(--header-height));
   background-color: var(--color-white);
   box-sizing: border-box;
-  position: sticky;
+  position: fixed;
   top: var(--header-height);
   left: 0;
+  transition: .2s;
   
   &:hover,
   &:focus { @include thin-scrollbar; }
 
-  &Hidden { display: none; }
+  &Hidden {
+    transform: translateX(-100%);
+  }
 }
 
 .navigationGroup {

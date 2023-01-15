@@ -1,0 +1,123 @@
+@use "assets/scss/mixins" as *;
+
+.channelDetails {
+  padding-bottom: 30px;
+}
+
+.banner {
+  width: 100%;
+  height: 16vw;
+  object-fit: cover;
+}
+
+.container {
+  padding-right: 16px;
+  padding-left: 16px;
+
+  @include media-min(md) {
+    padding-right: 6vw;
+    padding-left: 6vw;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.channelInfo {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 24px;
+  margin-right: 8px;
+}
+
+.channelAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.channelDescription {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.channelTitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.textSecondary {
+  color: var(--color-text-secondary);
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.subscribeBtn {
+  flex-shrink: 0;
+  color: var(--color-white);
+  font-size: .875rem;
+  line-height: 2.25rem;
+  padding: 0 16px;
+  background-color: var(--color-black);
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    background-color: #272727;
+  }
+}
+
+.tabs {
+  @include invisible-scrollbar;
+
+  display: flex;
+  margin: 0 -16px 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid var(--color-grey-1);
+  box-sizing: border-box;
+
+  @include media-min(md) {
+    padding-left: 6vw;
+    padding-right: 6vw;
+    margin-left: -6vw;
+    margin-right: -6vw;
+  }
+}
+
+.tabsBtn {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: .875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  height: 48px;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+  transform: var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-black);
+  }
+
+  &Active {
+    color: black;
+    border-bottom: 2px solid #606060;
+  }
+}

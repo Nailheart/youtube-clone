@@ -1,13 +1,13 @@
-import clsx from 'clsx';
-import { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { Header, Sidebar } from 'components/common/common';
+import { clsx } from 'helpers/helpers';
+import { useLocation, useEffect, useState } from 'hooks/hooks';
+import { Header, Sidebar, Outlet } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const Layout = () => {
   const location = useLocation();
   const sidebarIsModal = location.pathname.split('/').includes('video'); // todo
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
+  const contentFullWidth = sidebarIsModal ? styles.contentFullWidth : !sidebarIsOpen && styles.contentFullWidth;
 
   const handleToggleSidebar = (showSidebar: boolean) => {
     setSidebarIsOpen(showSidebar);
@@ -28,16 +28,14 @@ const Layout = () => {
         toggleSidebar={handleToggleSidebar}
       />
 
-      <div className={styles.container}>
-        <Sidebar
-          sidebarIsOpen={sidebarIsOpen}
-          sidebarIsModal={sidebarIsModal}
-          toggleSidebar={handleToggleSidebar}
-        />
-        
-        <div className={clsx(styles.content, !sidebarIsOpen && styles.contentFullWidth)}>
-          <Outlet/>
-        </div>
+      <Sidebar
+        sidebarIsOpen={sidebarIsOpen}
+        sidebarIsModal={sidebarIsModal}
+        toggleSidebar={handleToggleSidebar}
+      />
+      
+      <div className={clsx(styles.content, contentFullWidth)}>
+        <Outlet/>
       </div>
     </div>
   );

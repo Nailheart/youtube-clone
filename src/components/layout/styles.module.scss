@@ -6,11 +6,14 @@
   min-height: 100vh;
 }
 
-.container {
-  display: flex;
-}
-
 .content {
-  flex-grow: 1;
-  padding: 12px 24px;
+  height: 100%;
+  margin-left: var(--sidebar-width);
+  box-sizing: border-box;
+  transition: var(--transition);
+  overflow-x: hidden;
+
+  &FullWidth {
+    margin-left: 0;
+  }
 }

@@ -2,6 +2,7 @@
   width: 100%;
   object-fit: cover;
   border-radius: 16px;
+  aspect-ratio: 1.75 / 1;
 }
 
 .cardDescription {
@@ -22,12 +23,7 @@
   -webkit-box-orient: vertical;
 }
 
-.cardChannelTitle {
-  color: var(--color-text-secondary);
-  font-size: .8rem;
-}
-
-.cardPublishTime {
+.textSecondary {
   color: var(--color-text-secondary);
   font-size: .8rem;
 }
