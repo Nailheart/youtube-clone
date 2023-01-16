@@ -43,9 +43,12 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
               <ul className={styles.links}>
                 {item.links.map((item, index) => (
                   <li key={index}>
-                    <Link className={styles.link} to={item.path}>
+                    <Link 
+                      className={({ isActive }) => clsx(styles.link, isActive && styles.linkActive)}
+                      to={item.path}
+                    >
                       <Icon name={item.icon} />
-                      {item.title}
+                      <span className={styles.linkText}>{item.title}</span>
                     </Link>
                   </li>
                 ))}
@@ -68,9 +71,12 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
           <ul className={styles.links}>
             {item.links.map((item, index) => (
               <li key={index}>
-                <Link className={styles.link} to={item.path}>
+                <Link 
+                  className={({ isActive }) => clsx(styles.link, isActive && styles.linkActive)}
+                  to={item.path}
+                >
                   <Icon name={item.icon} />
-                  {item.title}
+                  <span className={styles.linkText}>{item.title}</span>
                 </Link>
               </li>
             ))}

@@ -102,15 +102,26 @@
   grid-template-columns: min-content 1fr;
   align-items: center;
   gap: 0 24px;
+  max-width: 208px;
   min-height: 40px;
   padding: 0 12px;
   border-radius: 10px;
+  box-sizing: border-box;
   transition: var(--transition);
 
-  &:hover,
-  &:focus-visible {
+  &:not(&Active):hover,
+  &:not(&Active):focus-visible {
     background-color: var(--color-light);
   }
+
+  &Active {
+    font-weight: 500;
+    background-color: #e6e6e6;
+  }
+}
+
+.linkText {
+  @include ellipsis-text;
 }
 
 .copyright {
