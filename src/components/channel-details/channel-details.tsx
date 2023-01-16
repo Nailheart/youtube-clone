@@ -1,8 +1,8 @@
-import { AppRoute } from 'common/enums/enums';
 import { ChannelDetailsResponseDto, LoaderFunctionArgs } from 'common/types/types';
-import { fetchFromAPI, insertUrlParams } from 'helpers/helpers';
+import { clsx, fetchFromAPI, insertUrlParams } from 'helpers/helpers';
 import { useLoaderData, useParams } from 'hooks/hooks';
 import { Outlet, Link } from 'components/common/common';
+import { TABS_NAVIGATION_ITEMS } from './common/constants';
 import styles from './styles.module.scss';
 
 const ChannelDetails = () => {
@@ -41,16 +41,15 @@ const ChannelDetails = () => {
           <button className={styles.subscribeBtn}>Subscribe</button>
         </div>
 
-        {/* TODO: fix  */}
         <div className={styles.tabs}>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID, {id: id as string})}>Home</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_VIDEOS, {id: id as string})}>Videos</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_SHORTS, {id: id as string})}>Shorts</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_LIVE, {id: id as string})}>Live</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_PLAYLISTS, {id: id as string})}>Playlists</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_COMMUNITY, {id: id as string})}>Community</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_CHANNELS, {id: id as string})}>Channels</Link>
-          <Link className={styles.tabsBtn} to={insertUrlParams(AppRoute.CHANNEL_ID_ABOUT, {id: id as string})}>About</Link>
+          {TABS_NAVIGATION_ITEMS.map(item => (
+            <Link 
+              className={({ isActive }) => clsx(styles.tabsBtn, isActive && styles.tabsBtnActive)}
+              to={insertUrlParams(item.href, {id: id as string})}
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
 
         <Outlet/>

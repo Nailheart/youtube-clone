@@ -36,6 +36,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path={AppRoute.VIDEO_ID} element={<VideoDetails />} loader={videoDetailsLoader} />
     <Route path={AppRoute.CHANNEL_ID} element={<ChannelDetails />} loader={channelDetailsLoader}>
       <Route index element={<ChannelHome />} />
+      <Route path={AppRoute.CHANNEL_ID_HOME} element={<ChannelHome />} />
       <Route path={AppRoute.CHANNEL_ID_ABOUT} element={<ChannelAbout />} />
       <Route path={AppRoute.CHANNEL_ID_CHANNELS} element={<ChannelChannels />} />
       <Route path={AppRoute.CHANNEL_ID_COMMUNITY} element={<ChannelCommunity />} />

@@ -1,6 +1,7 @@
 enum AppRoute {
   ROOT = '/',
   CHANNEL_ID = '/channel/:id',
+  CHANNEL_ID_HOME = '/channel/:id/home',
   CHANNEL_ID_VIDEOS = '/channel/:id/videos',
   CHANNEL_ID_SHORTS = '/channel/:id/shorts',
   CHANNEL_ID_LIVE = '/channel/:id/live',
