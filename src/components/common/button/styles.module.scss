@@ -1,0 +1,43 @@
+.button {
+  display: flex;
+  align-items: center;
+  font-size: .875rem;
+  font-weight: 500;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+
+  > svg {
+    margin-right: 6px;
+  }
+}
+
+.primary {
+  color: var(--color-text-primary);
+  background-color: rgba(0,0,0, .05);
+
+  &:hover,
+  &:focus-visible {
+    background-color: #e5e5e5;
+  }
+}
+
+.secondary {
+  color: var(--color-white);
+  background-color: var(--color-black);
+
+  &:hover,
+  &:focus-visible {
+    background-color: #272727;
+  }
+}
+
+.text {
+  min-height: auto;
+  padding: 0 5px;
+  border-radius: 0;
+}
