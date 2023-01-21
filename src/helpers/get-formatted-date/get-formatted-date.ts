@@ -1,6 +1,6 @@
 import { format, formatDistance } from 'date-fns';
 
-type FormatDateType = 'distance' | 'yyyy-MM-dd';
+type FormatDateType = 'distance' | 'MMM dd yyyy';
 
 const getFormattedDate = (date: string, formatDate: FormatDateType): string => {
   if (formatDate === 'distance') {
