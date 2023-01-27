@@ -4,7 +4,6 @@ import { useLoaderData, useState } from 'hooks/hooks';
 import {
   fetchFromAPI,
   getFormattedDate,
-  insertLinksIntoText,
   sanitizeHTML,
   clsx,
 } from 'helpers/helpers';
@@ -16,7 +15,6 @@ const VideoDetails = () => {
   const [isShowDescription, setIsShowDescription] = useState(false);
   const videoDetails = useLoaderData() as VideoDetailsResponseDto;
   const video = videoDetails.items[0];
-  const videoDescription = insertLinksIntoText(video.snippet.description);
 
   const toggleDescription = () => setIsShowDescription(!isShowDescription);
 
@@ -45,8 +43,8 @@ const VideoDetails = () => {
             {getFormattedDate(video.snippet.publishedAt, 'MMM dd yyyy')}
           </span>
           <Content
-            className={clsx(!isShowDescription && styles.content)} 
-            html={videoDescription} 
+            className={clsx(!isShowDescription && styles.content)}
+            content={video.snippet.description}
           />
           <Button 
             className={styles.toggleBtn}
