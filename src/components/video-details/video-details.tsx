@@ -4,17 +4,21 @@ import { useLoaderData, useState } from 'hooks/hooks';
 import {
   fetchFromAPI,
   getFormattedDate,
+  getFormattedNumber,
   sanitizeHTML,
   clsx,
 } from 'helpers/helpers';
 import { Button, Content } from 'components/common/common';
 import styles from './styles.module.scss';
 
-// TODO: fix number format
 const VideoDetails = () => {
   const [isShowDescription, setIsShowDescription] = useState(false);
   const videoDetails = useLoaderData() as VideoDetailsResponseDto;
   const video = videoDetails.items[0];
+  const viewCount = video.statistics.viewCount
+    ? getFormattedNumber(Number(video.statistics.viewCount)) 
+    : 'unknown';
+  ;
 
   const toggleDescription = () => setIsShowDescription(!isShowDescription);
 
@@ -39,7 +43,7 @@ const VideoDetails = () => {
 
         <div className={clsx(styles.description, !isShowDescription && styles.descriptionHidden)}>
           <span className={styles.statistics}>
-            {video.statistics.viewCount} views &nbsp;
+            {viewCount} views &nbsp;
             {getFormattedDate(video.snippet.publishedAt, 'MMM dd yyyy')}
           </span>
           <Content

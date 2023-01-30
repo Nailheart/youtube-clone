@@ -1,5 +1,10 @@
 import { ChannelDetailsResponseDto, LoaderFunctionArgs } from 'common/types/types';
-import { clsx, fetchFromAPI, insertUrlParams } from 'helpers/helpers';
+import { 
+  clsx,
+  fetchFromAPI,
+  insertUrlParams,
+  getFormattedNumber,
+} from 'helpers/helpers';
 import { useLoaderData, useParams } from 'hooks/hooks';
 import { Outlet, Link } from 'components/common/common';
 import { TABS_NAVIGATION_ITEMS } from './common/constants';
@@ -9,7 +14,8 @@ const ChannelDetails = () => {
   const { id } = useParams();
   const { items } = useLoaderData() as ChannelDetailsResponseDto;
   const channelDetails = items[0];
-
+  const subscriberCount = getFormattedNumber(Number(channelDetails.statistics.subscriberCount));
+  
   return (
     <div className={styles.channelDetails}>
       <img 
@@ -34,7 +40,7 @@ const ChannelDetails = () => {
             <div className={styles.channelDescription}>
               <h1 className={styles.channelTitle}>{channelDetails.snippet.title}</h1>
               <span className={styles.textSecondary}>{channelDetails.snippet.customUrl}</span>
-              <span className={styles.textSecondary}>{channelDetails.statistics.subscriberCount} subscribers</span>
+              <span className={styles.textSecondary}>{subscriberCount} subscribers</span>
             </div>
           </div>
 
