@@ -23,6 +23,8 @@ type IconName =
   | 'search'
   | 'cross'
   | 'burger'
-  | 'dots';
+  | 'dots'
+  | 'share'
+  | 'save';
 
 export { type IconName };
