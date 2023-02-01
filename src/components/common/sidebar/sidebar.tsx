@@ -83,7 +83,12 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
           </ul>
         </div>
       ))}
-      <div className={styles.copyright}>© 2022 Google LLC</div>
+      <div className={styles.copyright}>
+        <span>© 2022 Google LLC</span>
+        <span className={styles.createdBy}>
+          Created by <a href="https://github.com/Nailheart" target="_blank" rel="noreferrer">Nailheart</a>
+        </span>
+      </div>
     </aside>
   );
 };

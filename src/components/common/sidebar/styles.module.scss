@@ -132,6 +132,21 @@
   border-top: 1px solid rgba(0,0,0, .1);
 }
 
+.createdBy {
+  display: block;
+  margin-top: 3px;
+  
+  > a {
+    transition: var(--transition);
+  
+    &:hover,
+    &:focus-visible {
+      color: var(--color-dark-blue);
+      text-decoration: underline;
+    }
+  }
+}
+
 .overlay {
   height: 100%;
   width: 100%;
