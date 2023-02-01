@@ -16,6 +16,10 @@ export {
   type SearchVideoResponseDto,
 } from './search/search';
 export {
+  type SuggestedVideoResponseDto,
+  type SuggestedVideosResponseDto,
+} from './suggested-videos/suggested-videos';
+export {
   type IconName,
   type NavigationItem,
 } from './ui/ui';

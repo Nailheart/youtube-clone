@@ -1,4 +1,4 @@
-type PlaylistVideoResponseDto = {
+type SuggestedVideoResponseDto = {
   kind: string;
   id: {
     kind: string;
@@ -37,15 +37,9 @@ type PlaylistVideoResponseDto = {
       }
     },
     channelTitle: string;
-    playlistId: string;
-    position: number;
-    resourceId: {
-      kind: string;
-      videoId: string;
-    },
-    videoOwnerChannelTitle: string;
-    videoOwnerChannelId: string;
+    liveBroadcastContent: string;
+    publishTime: string;
   }
 };
 
-export { type PlaylistVideoResponseDto };
+export { type SuggestedVideoResponseDto };

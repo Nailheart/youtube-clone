@@ -1,6 +1,7 @@
 .button {
   display: flex;
   align-items: center;
+  gap: 6px;
   font-size: .875rem;
   font-weight: 500;
   min-height: 36px;
@@ -10,10 +11,6 @@
   border: none;
   cursor: pointer;
   transition: var(--transition);
-
-  > svg {
-    margin-right: 6px;
-  }
 }
 
 .primary {
