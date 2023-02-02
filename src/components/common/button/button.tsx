@@ -15,7 +15,7 @@ type Props = {
 const Button: FC<Props> = ({
   title,
   className,
-  theme = 'text',
+  theme,
   iconName,
   isIconBtn,
   onClick,

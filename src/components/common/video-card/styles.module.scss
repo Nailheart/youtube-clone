@@ -1,3 +1,31 @@
+.card {
+  &:hover,
+  &:focus-visible {
+    .toggle { opacity: 1; }
+  }
+
+  &Horizontal {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 8px;
+
+    .cardImg { border-radius: 8px; }
+    
+    .cardTitle {
+      font-size: .875rem;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .cardDescription { margin-top: 0; }
+
+    .textSecondary {
+      font-size: .75rem;
+      line-height: 1.25;
+    }
+  }
+}
+
 .cardImg {
   width: 100%;
   object-fit: cover;
@@ -6,9 +34,11 @@
 }
 
 .cardDescription {
-  display: grid;
-  gap: 5px 0;
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
+  position: relative;
+  padding-right: 24px;
 }
 
 .cardTitle {
@@ -16,7 +46,8 @@
   font-size: 1.1rem;
   line-height: 1.2;
   font-weight: 500;
-  max-height: 4rem;
+  max-height: 2.8rem;
+  margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -26,4 +57,21 @@
 .textSecondary {
   color: var(--color-text-secondary);
   font-size: .8rem;
+  margin-bottom: 2px;
+}
+
+.toggle {
+  justify-content: center;
+  width: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: -10px;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-grey-1);
+  }
 }

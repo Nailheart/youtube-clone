@@ -108,6 +108,7 @@ const VideoDetails = () => {
           <Button 
             className={styles.toggleBtn}
             title={isShowDescription ? 'Show less' : 'Show more'}
+            theme="text"
             onClick={toggleDescription}
           />
         </div>
@@ -126,6 +127,7 @@ const VideoDetails = () => {
             title={video.snippet.title}
             channelTitle={video.snippet.channelTitle}
             publishTime={video.snippet.publishedAt}
+            isHorizontal
           />
         ))}
       </div>
