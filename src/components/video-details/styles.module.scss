@@ -67,6 +67,35 @@
   gap: 8px;
 }
 
+.estimateButtons {
+  display: flex;
+}
+
+.like {
+  border-radius: 18px 0 0 18px;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 1px;
+    height: 24px;
+    background-color: rgba(0,0,0, .1);
+    position: absolute;
+    right: 0;
+    top: 6px;
+  }
+}
+
+.dislike {
+  padding: 0 16px;
+  width: 52px;
+  border-radius: 0 18px 18px 0;
+
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
 .description {
   font-size: 0.875rem;
   line-height: 1.4;

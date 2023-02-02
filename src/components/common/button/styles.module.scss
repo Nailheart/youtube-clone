@@ -11,6 +11,22 @@
   border: none;
   cursor: pointer;
   transition: var(--transition);
+
+  > span { margin-top: 1px; }
+  > svg { flex-shrink: 0; }
+}
+
+.text {
+  min-height: auto;
+  padding: 0 5px;
+  border-radius: 0;
+
+  > span { margin-top: 0; }
+}
+
+.icon {
+  padding: 6px;
+  border-radius: 50%;
 }
 
 .primary {
@@ -31,10 +47,4 @@
   &:focus-visible {
     background-color: #272727;
   }
-}
-
-.text {
-  min-height: auto;
-  padding: 0 5px;
-  border-radius: 0;
 }

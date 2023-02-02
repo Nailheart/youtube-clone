@@ -8,6 +8,7 @@ type Props = {
   className?: string;
   theme?: 'primary' | 'secondary' | 'text';
   iconName?: IconName;
+  isIconBtn?: boolean;
   onClick?: () => void;
 }
 
@@ -16,6 +17,7 @@ const Button: FC<Props> = ({
   className,
   theme = 'text',
   iconName,
+  isIconBtn,
   onClick,
 }) => {
   const hasIcon = Boolean(iconName);
@@ -25,12 +27,14 @@ const Button: FC<Props> = ({
       className={clsx(
         styles.button,
         theme && styles[theme],
+        isIconBtn && styles.icon,
         className
       )}
       onClick={onClick}
+      aria-label={isIconBtn ? title : ''}
     >
       {hasIcon && <Icon name={iconName as IconName} />}
-      {title}
+      {!isIconBtn && <span>{title}</span>}
     </button>
   );
 };

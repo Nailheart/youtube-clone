@@ -26,12 +26,12 @@ const VideoDetails = () => {
   const video = videoDetailsData.items[0];
   const suggestedVideos = relatedVideosData.items;
   const channelDetails = channelDetailsData.items[0];
-  
   const viewCount = video.statistics.viewCount
     ? getFormattedNumber(Number(video.statistics.viewCount))
     : 'unknown';
   ;
   const subscriberCount = getFormattedNumber(Number(channelDetails.statistics.subscriberCount));
+  const likeCount = getFormattedNumber(Number(video.statistics.likeCount));
 
   const toggleDescription = () => setIsShowDescription(!isShowDescription);
 
@@ -66,13 +66,27 @@ const VideoDetails = () => {
               <span className={styles.channelSubscriberCount}>{subscriberCount} subscribers</span>
             </div>
             
-            <Button title="Subscribe" theme="secondary"/>
+            <Button title="Subscribe" theme="secondary" />
           </div>
           <div className={styles.buttons}>
-            <Button title="Share" theme="primary" iconName="share"/>
-            <Button title="Save" theme="primary" iconName="save"/>
-            {/* TODO: add icon btn */}
-            <Button title="" theme="primary" iconName="dots"/> 
+            <div className={styles.estimateButtons}>
+              <Button
+                className={styles.like}
+                title={likeCount}
+                theme="primary"
+                iconName="like"
+              />
+              <Button 
+                className={styles.dislike}
+                title="Dislike"
+                theme="primary"
+                iconName="like"
+                isIconBtn
+              />
+            </div>
+            <Button title="Share" theme="primary" iconName="share" />
+            <Button title="Save" theme="primary" iconName="save" />
+            <Button title="Show more" theme="primary" iconName="dots" isIconBtn />
           </div>
         </div>
 
