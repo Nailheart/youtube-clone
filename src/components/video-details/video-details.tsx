@@ -1,5 +1,6 @@
 import ReactPlayer from 'react-player/youtube';
-import { 
+import { AppRoute } from 'common/enums/enums';
+import {
   LoaderFunctionArgs,
   VideoDetailsResponseDto,
   SuggestedVideosResponseDto,
@@ -12,8 +13,9 @@ import {
   getFormattedNumber,
   sanitizeHTML,
   clsx,
+  insertUrlParams,
 } from 'helpers/helpers';
-import { Button, VideoCard, Content } from 'components/common/common';
+import { Button, VideoCard, Content, Link } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const VideoDetails = () => {
@@ -51,18 +53,22 @@ const VideoDetails = () => {
         <h2 className={styles.videoTitle}>{sanitizeHTML(video.snippet.title)}</h2>
         <div className={styles.info}>
           <div className={styles.channelInfo}>
-            <img
-              className={styles.channelLogo}
-              src={
-                channelDetails.snippet.thumbnails.high.url ??
-                channelDetails.snippet.thumbnails.medium.url ??
-                channelDetails.snippet.thumbnails.default.url
-              }
-              alt="Channel logo"
-            />
+            <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: channelDetails.id})}>
+              <img
+                className={styles.channelLogo}
+                src={
+                  channelDetails.snippet.thumbnails.high.url ??
+                  channelDetails.snippet.thumbnails.medium.url ??
+                  channelDetails.snippet.thumbnails.default.url
+                }
+                alt="Channel logo"
+              />
+            </Link>
             
             <div className={styles.channelDescription}>
-              <h3 className={styles.channelTitle}>{channelDetails.snippet.title}</h3>
+              <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: channelDetails.id})}>
+                <h3 className={styles.channelTitle}>{channelDetails.snippet.title}</h3>
+              </Link>
               <span className={styles.channelSubscriberCount}>{subscriberCount} subscribers</span>
             </div>
             
