@@ -1,6 +1,6 @@
 import { clsx } from 'helpers/helpers';
 import { useLocation, useEffect, useState } from 'hooks/hooks';
-import { Header, Sidebar, Outlet } from 'components/common/common';
+import { Header, Sidebar, Outlet, ScrollRestoration } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const Layout = () => {
@@ -37,6 +37,7 @@ const Layout = () => {
       <div className={clsx(styles.content, contentFullWidth)}>
         <Outlet/>
       </div>
+      <ScrollRestoration />
     </div>
   );
 };

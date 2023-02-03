@@ -7,4 +7,4 @@ export { Icon } from './icon/icon';
 export { Link } from './link/link';
 export { Sidebar } from './sidebar/sidebar';
 export { VideoCard } from './video-card/video-card';
-export { Outlet } from 'react-router-dom';
+export { Outlet, ScrollRestoration } from 'react-router-dom';
