@@ -6,7 +6,7 @@ import {
   getFormattedNumber,
 } from 'helpers/helpers';
 import { useLoaderData, useParams } from 'hooks/hooks';
-import { Outlet, Link } from 'components/common/common';
+import { Outlet, Link, HorizontalScroll } from 'components/common/common';
 import { TABS_NAVIGATION_ITEMS } from './common/constants';
 import styles from './styles.module.scss';
 
@@ -15,7 +15,7 @@ const ChannelDetails = () => {
   const { items } = useLoaderData() as ChannelDetailsResponseDto;
   const channelDetails = items[0];
   const subscriberCount = getFormattedNumber(Number(channelDetails.statistics.subscriberCount));
-  
+
   return (
     <div className={styles.channelDetails}>
       <img 
@@ -48,14 +48,17 @@ const ChannelDetails = () => {
         </div>
 
         <div className={styles.tabs}>
-          {TABS_NAVIGATION_ITEMS.map(item => (
-            <Link 
-              className={({ isActive }) => clsx(styles.tabsBtn, isActive && styles.tabsBtnActive)}
-              to={insertUrlParams(item.href, {id: id as string})}
-            >
-              {item.title}
-            </Link>
-          ))}
+          <HorizontalScroll>
+            {TABS_NAVIGATION_ITEMS.map(item => (
+              <Link
+                key={item.title}
+                className={({ isActive }) => clsx(styles.tabsLink, isActive && styles.tabsLinkActive)}
+                to={insertUrlParams(item.href, {id: id as string})}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </HorizontalScroll>
         </div>
 
         <Outlet/>

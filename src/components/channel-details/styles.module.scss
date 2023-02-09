@@ -80,24 +80,28 @@
 }
 
 .tabs {
-  @include invisible-scrollbar;
-
-  display: flex;
-  margin: 0 -16px 24px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border-bottom: 1px solid var(--color-grey-1);
+  margin-bottom: 24px;
   box-sizing: border-box;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: calc(100% + 32px);
+    height: 1px;
+    background-color: var(--color-grey-1);
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
 
   @include media-min(md) {
-    padding-left: 6vw;
-    padding-right: 6vw;
-    margin-left: -6vw;
-    margin-right: -6vw;
+    &::before { width: calc(100% + 12vw); }
   }
 }
 
-.tabsBtn {
+.tabsLink {
   display: flex;
   align-items: center;
   color: var(--color-text-secondary);
