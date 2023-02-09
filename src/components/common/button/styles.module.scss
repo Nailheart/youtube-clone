@@ -14,7 +14,7 @@
   transition: var(--transition);
 
   > span { margin-top: 1px; }
-  > svg { flex-shrink: 0; }
+  .icon { flex-shrink: 0; }
 }
 
 .text {
@@ -25,7 +25,7 @@
   > span { margin-top: 0; }
 }
 
-.icon {
+.iconBtn {
   padding: 6px;
   border-radius: 50%;
 }

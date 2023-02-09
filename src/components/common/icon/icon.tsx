@@ -59,17 +59,18 @@ const listIcons: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {
 
 type Props = {
   name: IconName;
+  className?: string;
   color?: string;
   width?: number;
   height?: number;
   size?: number;
 }
 
-const Icon: FC<Props> = ({ name, color, width, height, size = 24, }) => {
+const Icon: FC<Props> = ({ name, className, color, width, height, size = 24, }) => {
   const SVG = listIcons[name];
 
   return (
-    <SVG color={color} width={width ?? size} height={height ?? size} />
+    <SVG className={className} color={color} width={width ?? size} height={height ?? size} />
   );
 };
 

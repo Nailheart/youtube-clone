@@ -27,13 +27,13 @@ const Button: FC<Props> = ({
       className={clsx(
         styles.button,
         theme && styles[theme],
-        isIconBtn && styles.icon,
+        isIconBtn && styles.iconBtn,
         className
       )}
       onClick={onClick}
       aria-label={isIconBtn ? title : ''}
     >
-      {hasIcon && <Icon name={iconName as IconName} />}
+      {hasIcon && <Icon className={styles.icon} name={iconName as IconName} />}
       {!isIconBtn && <span>{title}</span>}
     </button>
   );
