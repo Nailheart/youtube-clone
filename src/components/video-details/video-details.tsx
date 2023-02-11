@@ -6,7 +6,7 @@ import {
   SuggestedVideosResponseDto,
   ChannelDetailsResponseDto,
 } from 'common/types/types';
-import { useLoaderData, useState } from 'hooks/hooks';
+import { useEffect, useLoaderData, useLocation, useState } from 'hooks/hooks';
 import {
   fetchFromAPI,
   getFormattedDate,
@@ -19,6 +19,7 @@ import { Button, VideoCard, Content, Link } from 'components/common/common';
 import styles from './styles.module.scss';
 
 const VideoDetails = () => {
+  const { pathname } = useLocation();
   const [isShowDescription, setIsShowDescription] = useState(false);
   const {videoDetailsData,  relatedVideosData, channelDetailsData}  = useLoaderData() as {
     videoDetailsData: VideoDetailsResponseDto,
@@ -36,6 +37,12 @@ const VideoDetails = () => {
   const likeCount = getFormattedNumber(Number(video.statistics.likeCount));
 
   const toggleDescription = () => setIsShowDescription(!isShowDescription);
+
+  useEffect(() => {
+    if (isShowDescription) {
+      setIsShowDescription(false);
+    }
+  }, [pathname]);
 
   return (
     <div className={styles.videoDetails}>
