@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'common/types/types';
-import { useMatchMedia, useRef } from 'hooks/hooks';
-import { clsx } from 'helpers/helpers';
+import { useEffect, useRef, useState } from 'hooks/hooks';
+import { clsx, debounce } from 'helpers/helpers';
 import { Icon } from 'components/common/common';
 import styles from './styles.module.scss';
 
@@ -10,12 +10,11 @@ type Props = {
   shift?: number;
 }
 
-// 😕
 const HorizontalScroll: FC<Props> = ({ children, className, shift = 10 }) => {
-  const { xl } = useMatchMedia();
+  const [hideArrow, setHideArrow] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   let myReq: number;
-
+  
   const scroll = (scrollOffset: number) => {
     if (ref.current) {
       ref.current.scrollLeft += scrollOffset;
@@ -44,6 +43,27 @@ const HorizontalScroll: FC<Props> = ({ children, className, shift = 10 }) => {
     cancelAnimationFrame(myReq);
   }
 
+  const hideScrollArrow = () => {
+    const horizontalScrollContainer = document.querySelector(`.${styles.horizontalScrollContainer}`) as HTMLElement;
+    const children = horizontalScrollContainer.children;
+    let childrenWidth = 0;
+
+    for (let i = 0; i < children.length; i++) {
+      childrenWidth += (children[i] as HTMLElement).offsetWidth;
+    }
+
+    setHideArrow(horizontalScrollContainer.offsetWidth > childrenWidth);
+  }
+
+  useEffect(() => {
+    hideScrollArrow();
+    
+    const debouncedHandleResize = debounce(hideScrollArrow, 1000);
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return () => window.removeEventListener('resize', debouncedHandleResize);
+  });
+
   return (
     <div className={clsx(styles.horizontalScroll, className)}>
       <button
@@ -51,7 +71,7 @@ const HorizontalScroll: FC<Props> = ({ children, className, shift = 10 }) => {
           styles.scrollBtn,
           styles.scrollBtnLeft,
           styles.scrollBtnHide,
-          xl && styles.scrollBtnHide,
+          hideArrow && styles.scrollBtnHide,
         )}
         onMouseDown={() => scroll(-shift)}
         onMouseUp={stopScroll}
@@ -63,7 +83,7 @@ const HorizontalScroll: FC<Props> = ({ children, className, shift = 10 }) => {
         className={clsx(
           styles.scrollBtn,
           styles.scrollBtnRight,
-          xl && styles.scrollBtnHide,
+          hideArrow && styles.scrollBtnHide,
         )}
         onMouseDown={() => scroll(shift)}
         onMouseUp={stopScroll}
