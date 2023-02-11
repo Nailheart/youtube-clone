@@ -39,9 +39,7 @@ const VideoDetails = () => {
   const toggleDescription = () => setIsShowDescription(!isShowDescription);
 
   useEffect(() => {
-    if (isShowDescription) {
-      setIsShowDescription(false);
-    }
+    setIsShowDescription(false);
   }, [pathname]);
 
   return (
@@ -89,7 +87,7 @@ const VideoDetails = () => {
                 theme="primary"
                 iconName="like"
               />
-              <Button 
+              <Button
                 className={styles.dislike}
                 title="Dislike"
                 theme="primary"
@@ -105,8 +103,16 @@ const VideoDetails = () => {
 
         <div className={clsx(styles.description, !isShowDescription && styles.descriptionHidden)}>
           <span className={styles.statistics}>
-            {viewCount} views &nbsp;
-            {getFormattedDate(video.snippet.publishedAt, 'MMM dd yyyy')}
+            {isShowDescription
+              ? <>
+                {Number(video.statistics.viewCount).toLocaleString('en')} views &nbsp;
+                {getFormattedDate(video.snippet.publishedAt, 'MMM dd yyyy')}
+              </>
+              : <>
+                {viewCount} views &nbsp;
+                {getFormattedDate(video.snippet.publishedAt, 'distance')}
+              </>
+            }
           </span>
           <Content
             className={clsx(!isShowDescription && styles.content)}
