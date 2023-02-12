@@ -3,3 +3,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin cut-text($row-count, $max-height: 100%) {
+  display: -webkit-box;
+  max-height: $max-height;
+  overflow: hidden;
+  -webkit-line-clamp: $row-count;
+  -webkit-box-orient: vertical;
+}

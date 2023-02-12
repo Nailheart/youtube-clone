@@ -1,3 +1,5 @@
+@use "assets/scss/mixins" as *;
+
 .videoDetails {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -101,6 +103,7 @@
   line-height: 1.4;
   white-space: pre-wrap;
   margin-top: 12px;
+  margin-bottom: 24px;
   padding: 12px;
   background-color: rgba(0,0,0, .05);
   border-radius: 12px;
@@ -129,12 +132,7 @@
       }
     }
 
-    .content {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;    
-    }
+    .content { @include cut-text(4); }
   }
 }
 
@@ -151,4 +149,9 @@
 .suggestedVideos {
   display: grid;
   gap: 8px;
+}
+
+.comments {
+  display: grid;
+  row-gap: 16px;
 }
