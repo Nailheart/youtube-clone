@@ -1,7 +1,7 @@
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml, { IOptions } from 'sanitize-html';
 
-const sanitizeHTML = (html: string): string => {
-  return sanitizeHtml(html);
+const sanitizeHTML = (html: string, options?: IOptions): string => {
+  return sanitizeHtml(html, options);
 };
 
 export { sanitizeHTML };

@@ -1,6 +1,7 @@
-import "linkify-plugin-hashtag";
+import 'linkify-plugin-hashtag';
 import Linkify from 'linkify-react';
 import { FC } from 'common/types/types';
+import { sanitizeHTML } from 'helpers/helpers';
 
 type Props = {
   content: string;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const Content: FC<Props> = ({ content, className }) => {
+  const replacedContent = content.replace(/<br\s*\/?>/gi,'\n'); // replace br tag
+
   return (
     <div className={className}>
       <Linkify
@@ -20,7 +23,12 @@ const Content: FC<Props> = ({ content, className }) => {
             return href;
           },
         }}>
-        {content}
+        {sanitizeHTML(replacedContent, {
+          allowedTags: [],
+          allowedAttributes: {
+            a: [ 'href', 'name', 'target' ],
+          },
+        })}
       </Linkify>
     </div>
   );
