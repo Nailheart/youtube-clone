@@ -23,6 +23,10 @@ export {
   type IconName,
   type NavigationItem,
 } from './ui/ui';
+export {
+  type VideoCommentResponseDto,
+  type VideoCommentsResponseDto,
+} from './video-comments/video-comments';
 export { type VideoDetailsResponseDto } from './video-details/video-details';
 export { 
   type FC,
