@@ -29,6 +29,7 @@ import {
   videoDetailsLoader,
 } from './components/loaders';
 
+// TODO: add ErrorElement https://reactrouter.com/en/main/route/error-element#errorelement
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path={AppRoute.ROOT} element={<Layout />}>
     <Route index element={<Feed />} loader={feedLoader} />
