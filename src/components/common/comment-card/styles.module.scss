@@ -1,0 +1,76 @@
+@use "assets/scss/mixins" as *;
+
+.commentCard {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+}
+
+.img {
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.authorName {
+  font-size: .8rem;
+  font-weight: 500;
+  line-height: 1.125;
+  margin-bottom: 0;
+}
+
+.date {
+  color: var(--color-text-secondary);
+  font-size: .75rem;
+  line-height: 1.125;
+}
+
+.text {
+  font-size: .875rem;
+  line-height: 1.25;
+  white-space: pre-wrap;
+  margin-bottom: 10px;
+
+  a { color: #065fd4; }
+  &:last-of-type { margin-bottom: 0; }
+
+  &Hide {
+    @include cut-text(4);
+  }
+}
+
+.toggleText {
+  color: var(--color-text-secondary);
+  font-size: .875;
+  font-weight: 500;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.button {
+  font-size: .75rem;
+  margin-right: 8px;
+
+  > span { color: var(--color-text-secondary); }
+
+  &Dislike {
+    rotate: 180deg;
+  }
+}

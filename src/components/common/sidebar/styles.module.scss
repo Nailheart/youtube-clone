@@ -68,7 +68,6 @@
   position: fixed;
   top: var(--header-height);
   left: 0;
-  transition: .2s;
   
   &:hover,
   &:focus { @include thin-scrollbar; }

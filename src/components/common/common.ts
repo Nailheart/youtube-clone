@@ -1,11 +1,14 @@
 export { Button } from './button/button';
 export { CardList } from './card-list/card-list';
 export { ChannelCard } from './channel-card/channel-card';
+export { CommentCard } from './comment-card/comment-card';
 export { Content } from './content/content';
 export { Header } from './header/header';
 export { HorizontalScroll } from './horizontal-scroll/horizontal-scroll';
 export { Icon } from './icon/icon';
 export { Link } from './link/link';
 export { Sidebar } from './sidebar/sidebar';
+export { Spinner } from './spinner/spinner';
 export { VideoCard } from './video-card/video-card';
-export { Outlet, ScrollRestoration } from 'react-router-dom';
+export { Suspense } from 'react';
+export { Await, Outlet, ScrollRestoration } from 'react-router-dom';
