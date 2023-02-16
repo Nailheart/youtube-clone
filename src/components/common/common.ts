@@ -3,6 +3,7 @@ export { CardList } from './card-list/card-list';
 export { ChannelCard } from './channel-card/channel-card';
 export { CommentCard } from './comment-card/comment-card';
 export { Content } from './content/content';
+export { ErrorElement } from './error-element/error-element';
 export { Header } from './header/header';
 export { HorizontalScroll } from './horizontal-scroll/horizontal-scroll';
 export { Icon } from './icon/icon';

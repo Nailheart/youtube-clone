@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { AppRoute } from 'common/enums/enums';
+import { ErrorElement } from 'components/common/common';
 import {
   ChannelAbout,
   ChannelChannels,
@@ -29,9 +30,8 @@ import {
   videoDetailsLoader,
 } from './components/loaders';
 
-// TODO: add ErrorElement https://reactrouter.com/en/main/route/error-element#errorelement
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route path={AppRoute.ROOT} element={<Layout />}>
+  <Route path={AppRoute.ROOT} element={<Layout />} errorElement={<ErrorElement />}>
     <Route index element={<Feed />} loader={feedLoader} />
     <Route path={AppRoute.EXPLORE_CATEGORY} element={<Feed />} loader={feedLoader} />
     <Route path={AppRoute.VIDEO_ID} element={<VideoDetails />} loader={videoDetailsLoader} />

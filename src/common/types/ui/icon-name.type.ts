@@ -25,6 +25,7 @@ type IconName =
   | 'burger'
   | 'dots'
   | 'share'
-  | 'save';
+  | 'save'
+  | 'error';
 
 export { type IconName };

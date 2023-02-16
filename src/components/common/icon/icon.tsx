@@ -26,6 +26,7 @@ import { ReactComponent as Burger } from 'assets/img/icons/burger.svg';
 import { ReactComponent as Dots } from 'assets/img/icons/dots.svg';
 import { ReactComponent as Share } from 'assets/img/icons/share.svg';
 import { ReactComponent as Save } from 'assets/img/icons/save.svg';
+import { ReactComponent as Error } from 'assets/img/icons/error.svg';
 
 const listIcons: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {
   logo: Logo,
@@ -55,6 +56,7 @@ const listIcons: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {
   dots: Dots,
   share: Share,
   save: Save,
+  error: Error,
 }
 
 type Props = {

@@ -1,0 +1,29 @@
+.errorElement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 5vw;
+  box-sizing: border-box;
+}
+
+.icon {
+  color: var(--color-medium-red);
+  width: 40vw;
+  height: 40vw;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.link {
+  color: var(--color-dark-blue);
+  font-size: 1.2rem;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
