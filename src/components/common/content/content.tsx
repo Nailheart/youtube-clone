@@ -10,13 +10,19 @@ type Props = {
   className?: string;
 };
 
-// TODO: need refactor
 const Content: FC<Props> = ({ content, className }) => {
-  const replacedContent = content.replace(/<br\s*\/?>/gi,'\n'); // replace br tag
-  const regex = /(([0-9]|[0-9]{2}):[0-9]{2}:[0-9]{2})|(([0-9]|[0-9]{2}):[0-9]{2})/g; // time 😐
-  const timeList = replacedContent.match(regex);
+  const text = content.replace(/<br\s*\/?>/gi,'\n'); // replace br tag
+  const sanitizedContent = sanitizeHTML(text, {
+    allowedTags: [],
+    allowedAttributes: {
+      a: [ 'href', 'name', 'target' ],
+    },
+  });
 
-  registerKeywords(timeList ?? []);
+  // time format hh:mm:ss or mm:ss 😐
+  const regex = /(([0-9]|[0-9]{2}):[0-9]{2}:[0-9]{2})|(([0-9]|[0-9]{2}):[0-9]{2})/g;
+  const timeList = sanitizedContent.match(regex);
+  registerKeywords(timeList || []);
 
   return (
     <div className={className}>
@@ -32,12 +38,7 @@ const Content: FC<Props> = ({ content, className }) => {
             keyword: (keyword) => getSeconds(keyword).toString(),
           },
         }}>
-        {sanitizeHTML(replacedContent, {
-          allowedTags: [],
-          allowedAttributes: {
-            a: [ 'href', 'name', 'target' ],
-          },
-        })}
+        {sanitizedContent}
       </Linkify>
     </div>
   );

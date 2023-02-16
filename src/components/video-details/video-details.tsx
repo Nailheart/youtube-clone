@@ -22,6 +22,7 @@ import {
   sanitizeHTML,
   clsx,
   insertUrlParams,
+  defer,
 } from 'helpers/helpers';
 import { 
   Button,
@@ -29,27 +30,29 @@ import {
   Content,
   CommentCard,
   Link,
+  Suspense,
+  Await,
+  Spinner,
 } from 'components/common/common';
 import styles from './styles.module.scss';
 
-// TODO: add loader (Defer, Suspense, Await) 
-// https://reactrouter.com/en/main/guides/deferred#using-defer 
 const VideoDetails = () => {
   const { pathname } = useLocation();
   const [isShowDescription, setIsShowDescription] = useState(false);
   const {
     videoDetailsData,
-    relatedVideosData,
     channelDetailsData,
-    comments,
+    relatedVideosData,
+    commentsData,
   }  = useLoaderData() as {
     videoDetailsData: VideoDetailsResponseDto,
-    relatedVideosData: SuggestedVideosResponseDto,
     channelDetailsData: ChannelDetailsResponseDto,
-    comments: VideoCommentsResponseDto,
+    relatedVideosData: SuggestedVideosResponseDto,
+    commentsData: VideoCommentsResponseDto,
   };
+  
+  const refPlayer = useRef<ReactPlayer>(null);
   const video = videoDetailsData.items[0];
-  const suggestedVideos = relatedVideosData.items;
   const channelDetails = channelDetailsData.items[0];
   const viewCount = video.statistics.viewCount
     ? getFormattedNumber(Number(video.statistics.viewCount))
@@ -68,8 +71,7 @@ const VideoDetails = () => {
     }
   }
 
-  const refPlayer = useRef<ReactPlayer>(null);
-  const videoHandler = (e: Event) => {
+  const setVideoTime = (e: Event) => {
     e.preventDefault();
 
     const time = (e.target as Element).getAttribute('href');
@@ -88,11 +90,7 @@ const VideoDetails = () => {
 
     const timeLinks = document.querySelectorAll('.time-link');
     timeLinks.forEach(link => {
-      link.addEventListener('click', videoHandler);
-    });
-
-    return timeLinks.forEach(link => {
-      link.removeEventListener('click', videoHandler);
+      link.addEventListener('click', setVideoTime);
     });
   }, [pathname]);
 
@@ -100,7 +98,7 @@ const VideoDetails = () => {
     <div className={styles.videoDetails}>
       <div className={styles.container}>
         <div className={styles.playerWrapper}>
-          <ReactPlayer
+          <ReactPlayer          
             ref={refPlayer}
             className={styles.reactPlayer}
             url={`https://www.youtube.com/watch?v=${video.id}`}
@@ -181,36 +179,54 @@ const VideoDetails = () => {
             onClick={toggleDescription}
           />
         </div>
-        <div className={styles.comments}>
-          {comments.items.map((comment: VideoCommentResponseDto) => (
-            <CommentCard
-              key={comment.id}
-              img={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
-              text={comment.snippet.topLevelComment.snippet.textDisplay}
-              authorName={comment.snippet.topLevelComment.snippet.authorDisplayName}
-              likeCount={comment.snippet.topLevelComment.snippet.likeCount}
-              publishTime={comment.snippet.topLevelComment.snippet.publishedAt}
-            />
-          ))}
-        </div>
+        <Suspense fallback={<Spinner />}>
+          <Await resolve={commentsData}>
+            {(comments: VideoCommentsResponseDto) => (
+              <>
+                {Boolean(comments.items) && (
+                  <div className={styles.comments}>
+                    {comments.items.map((comment: VideoCommentResponseDto) => (
+                      <CommentCard
+                        key={comment.id}
+                        img={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
+                        text={comment.snippet.topLevelComment.snippet.textDisplay}
+                        authorName={comment.snippet.topLevelComment.snippet.authorDisplayName}
+                        likeCount={comment.snippet.topLevelComment.snippet.likeCount}
+                        publishTime={comment.snippet.topLevelComment.snippet.publishedAt}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </Await>
+        </Suspense>
       </div>
       <div className={styles.suggestedVideos}>
-        {suggestedVideos.map(video => (
-          <VideoCard
-            key={video.id.videoId}
-            videoId={video.id.videoId}
-            channelId={video.snippet.channelId}
-            img={
-              video.snippet.thumbnails.high.url ??
-              video.snippet.thumbnails.medium.url ??
-              video.snippet.thumbnails.default.url
-            }
-            title={video.snippet.title}
-            channelTitle={video.snippet.channelTitle}
-            publishTime={video.snippet.publishedAt}
-            isHorizontal
-          />
-        ))}
+        <Suspense fallback={<Spinner />}>
+          <Await resolve={relatedVideosData}>
+            {(relatedVideos: SuggestedVideosResponseDto,) => (
+              <>
+                {relatedVideos.items.map(video => (
+                  <VideoCard
+                    key={video.id.videoId}
+                    videoId={video.id.videoId}
+                    channelId={video.snippet.channelId}
+                    img={
+                      video.snippet.thumbnails.high.url ??
+                      video.snippet.thumbnails.medium.url ??
+                      video.snippet.thumbnails.default.url
+                    }
+                    title={video.snippet.title}
+                    channelTitle={video.snippet.channelTitle}
+                    publishTime={video.snippet.publishedAt}
+                    isHorizontal
+                  />
+                ))}
+              </>
+            )}
+          </Await>
+        </Suspense>
       </div>
     </div>
   );
@@ -220,14 +236,14 @@ const videoDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
 
   const videoDetailsData: VideoDetailsResponseDto = await fetchFromAPI(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`);
-  const relatedVideosData: SuggestedVideosResponseDto = await fetchFromAPI(`search?relatedToVideoId=${id}&part=id%2Csnippet&type=video`);
 
   const channelId = videoDetailsData.items[0].snippet.channelId;
   const channelDetailsData: ChannelDetailsResponseDto = await fetchFromAPI(`channels?part=snippet%2Cstatistics&id=${channelId}`);
 
-  const comments: VideoCommentsResponseDto = await fetchFromAPI(`commentThreads?part=snippet&videoId=${id}`);
+  const relatedVideosData: Promise<SuggestedVideosResponseDto> = fetchFromAPI(`search?relatedToVideoId=${id}&part=id%2Csnippet&type=video`);
+  const commentsData: Promise<VideoCommentsResponseDto> = fetchFromAPI(`commentThreads?part=snippet&videoId=${id}`);
 
-  return {videoDetailsData,  relatedVideosData, channelDetailsData, comments};
+  return defer({videoDetailsData, channelDetailsData, relatedVideosData, commentsData});
 }
 
 export { VideoDetails, videoDetailsLoader };

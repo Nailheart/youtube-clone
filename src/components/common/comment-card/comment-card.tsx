@@ -21,7 +21,7 @@ const CommentCard: FC<Props> = ({
   publishTime,
   className,
 }) => {
-  const hasLongText = text.length > 500; // TODO
+  const hasLongText = text.length > 500;
   const [showComment, setShowComment] = useState(hasLongText);
 
   const toggleComment = () => setShowComment(!showComment);

@@ -2,10 +2,13 @@
 
 .videoDetails {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 65% 1fr;
   align-items: flex-start;
-  gap: 0 24px;
   padding: 15px 24px 30px;
+}
+
+.container {
+  margin-right: 24px;
 }
 
 .playerWrapper {
