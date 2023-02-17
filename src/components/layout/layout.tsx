@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 const Layout = () => {
   const location = useLocation();
-  const sidebarIsModal = location.pathname.split('/').includes('video'); // todo
+  const sidebarIsModal = location.pathname.split('/').includes('video');
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
   const contentFullWidth = sidebarIsModal ? styles.contentFullWidth : !sidebarIsOpen && styles.contentFullWidth;
 
