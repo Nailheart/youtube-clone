@@ -5,3 +5,4 @@ YouTube clone created using :
   - [react](https://reactjs.org/)
   - [react-router-6.4](https://reactrouter.com/en/main/start/overview)
   - [scss-modules](https://sass-lang.com/documentation/modules)
+  - [Linkify](https://linkify.js.org/)
