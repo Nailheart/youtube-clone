@@ -16,7 +16,6 @@ import {
   useState
 } from 'hooks/hooks';
 import {
-  fetchFromAPI,
   getFormattedDate,
   getFormattedNumber,
   sanitizeHTML,
@@ -34,6 +33,12 @@ import {
   Await,
   Spinner,
 } from 'components/common/common';
+import {
+  videoDetailsApi,
+  channelDetailsApi,
+  suggestedVideosApi,
+  videoCommentsApi,
+} from 'services/services';
 import styles from './styles.module.scss';
 
 const VideoDetails = () => {
@@ -42,12 +47,12 @@ const VideoDetails = () => {
   const {
     videoDetailsData,
     channelDetailsData,
-    relatedVideosData,
+    suggestedVideosData,
     commentsData,
   }  = useLoaderData() as {
     videoDetailsData: VideoDetailsResponseDto,
     channelDetailsData: ChannelDetailsResponseDto,
-    relatedVideosData: SuggestedVideosResponseDto,
+    suggestedVideosData: SuggestedVideosResponseDto,
     commentsData: VideoCommentsResponseDto,
   };
   
@@ -154,7 +159,6 @@ const VideoDetails = () => {
             <Button title="Show more" theme="primary" iconName="dots" isIconBtn />
           </div>
         </div>
-
         <div className={clsx(styles.description, !isShowDescription && styles.descriptionHidden)}>
           <span className={styles.statistics}>
             {isShowDescription
@@ -204,10 +208,10 @@ const VideoDetails = () => {
       </div>
       <div className={styles.suggestedVideos}>
         <Suspense fallback={<Spinner />}>
-          <Await resolve={relatedVideosData}>
-            {(relatedVideos: SuggestedVideosResponseDto,) => (
+          <Await resolve={suggestedVideosData}>
+            {(suggestedVideos: SuggestedVideosResponseDto,) => (
               <>
-                {relatedVideos.items.map(video => (
+                {suggestedVideos.items.map(video => (
                   <VideoCard
                     key={video.id.videoId}
                     videoId={video.id.videoId}
@@ -233,17 +237,33 @@ const VideoDetails = () => {
 };
 
 const videoDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
-  const { id } = params;
+  const id = params.id as string;
 
-  const videoDetailsData: VideoDetailsResponseDto = await fetchFromAPI(`videos?part=contentDetails%2Csnippet%2Cstatistics&id=${id}`);
+  const videoDetailsData = await videoDetailsApi.getVideoDetails({
+    id,
+    part: ['contentDetails', 'snippet', 'statistics'],
+  });
 
   const channelId = videoDetailsData.items[0].snippet.channelId;
-  const channelDetailsData: ChannelDetailsResponseDto = await fetchFromAPI(`channels?part=snippet%2Cstatistics&id=${channelId}`);
+  const channelDetailsData = await channelDetailsApi.getChannelDetails({
+    id: channelId,
+    part: ['snippet', 'statistics'],
+  });
 
-  const relatedVideosData: Promise<SuggestedVideosResponseDto> = fetchFromAPI(`search?relatedToVideoId=${id}&part=id%2Csnippet&type=video`);
-  const commentsData: Promise<VideoCommentsResponseDto> = fetchFromAPI(`commentThreads?part=snippet&videoId=${id}`);
+  const suggestedVideosData = suggestedVideosApi.getSuggestedVideos({
+    part: ['id', 'snippet'],
+    relatedToVideoId: id,
+    type: 'video',
+    maxResults: 50,
+  });
 
-  return defer({videoDetailsData, channelDetailsData, relatedVideosData, commentsData});
+  const commentsData = videoCommentsApi.getVideoComments({
+    part: 'snippet',
+    videoId: id,
+    maxResults: 100,
+  });
+
+  return defer({videoDetailsData, channelDetailsData, suggestedVideosData, commentsData});
 }
 
 export { VideoDetails, videoDetailsLoader };

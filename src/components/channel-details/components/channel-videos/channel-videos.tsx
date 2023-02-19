@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, ChannelVideosResponseDto } from 'common/types/types';
 import { useLoaderData } from 'hooks/hooks';
-import { fetchFromAPI } from 'helpers/helpers';
 import { VideoCard } from 'components/common/common';
+import { channelVideosApi } from 'services/services';
 import styles from './styles.module.scss';
 
 const ChannelVideos = () => {
@@ -39,9 +39,13 @@ const ChannelVideos = () => {
 };
 
 const channelVideosLoader = async ({ params }: LoaderFunctionArgs) => {
-  const { id } = params;
+  const id = params.id as string;
 
-  const channelVideos = await fetchFromAPI(`search?channelId=${id}&part=snippet%2Cid&order=date&maxResults=50`);
+  const channelVideos = await channelVideosApi.getChannelVideos({
+    channelId: id,
+    part: ['id', 'snippet'],
+    maxResults: 50,
+  });
 
   return channelVideos;
 }

@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, SearchResponseDto } from 'common/types/types';
-import { useLoaderData  } from 'hooks/hooks';
-import { fetchFromAPI } from 'helpers/helpers';
+import { useLoaderData } from 'hooks/hooks';
 import { CardList } from 'components/common/common';
+import { searchApi } from 'services/services';
 import styles from './styles.module.scss';
 
 const Feed = () => {
@@ -16,9 +16,14 @@ const Feed = () => {
 
 const feedLoader = async ({ params }: LoaderFunctionArgs) => {
   const category = params.category;
-  
-  const data = await fetchFromAPI(`search?part=snippet&q=${category ?? ''}&regionCode=US&maxResults=50`);
 
+  const data = await searchApi.getSearchVideos({
+    q: category || '',
+    part: ['id', 'snippet'],
+    regionCode: 'US',
+    maxResults: 50,
+  });
+  
   return data;
 }
 

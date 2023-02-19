@@ -1,13 +1,13 @@
 import { ChannelDetailsResponseDto, LoaderFunctionArgs } from 'common/types/types';
 import { 
   clsx,
-  fetchFromAPI,
   insertUrlParams,
   getFormattedNumber,
 } from 'helpers/helpers';
 import { useLoaderData, useParams } from 'hooks/hooks';
 import { Outlet, Link, HorizontalScroll } from 'components/common/common';
 import { TABS_NAVIGATION_ITEMS } from './common/constants';
+import { channelDetailsApi } from 'services/services';
 import styles from './styles.module.scss';
 
 const ChannelDetails = () => {
@@ -68,9 +68,12 @@ const ChannelDetails = () => {
 };
 
 const channelDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
-  const { id } = params;
+  const id = params.id as string;
 
-  const channelDetails = await fetchFromAPI(`channels?part=snippet%2Cstatistics&id=${id}`);
+  const channelDetails = await channelDetailsApi.getChannelDetails({
+    id,
+    part: ['snippet', 'statistics'],
+  });
 
   return channelDetails;
 }
