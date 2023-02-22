@@ -10,11 +10,11 @@ const CardList: FC<Props> = ({ items }) => {
   return (
     <div className={styles.cardList}>
       <>
-        {items.map(item => {
+        {items.map((item, index) => {
           if ('channelId' in item.id) {
             return (
               <ChannelCard 
-                key={item.id.channelId}
+                key={item.id.channelId + index}
                 channelId={item.id.channelId}
                 img={
                   item.snippet.thumbnails.high.url ??
@@ -25,14 +25,11 @@ const CardList: FC<Props> = ({ items }) => {
               />
             )
           }
-          
-          return null;
-        })}
-        {items.map(item => {
+
           if ('videoId' in item.id) {
             return (
               <VideoCard
-                key={item.id.videoId}
+                key={item.id.videoId + index}
                 videoId={item.id.videoId}
                 channelId={item.snippet.channelId}
                 img={
