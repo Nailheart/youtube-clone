@@ -7,6 +7,7 @@ export { ErrorElement } from './error-element/error-element';
 export { Header } from './header/header';
 export { HorizontalScroll } from './horizontal-scroll/horizontal-scroll';
 export { Icon } from './icon/icon';
+export { InfiniteScroll } from './infinite-scroll/infinite-scroll';
 export { Link } from './link/link';
 export { Sidebar } from './sidebar/sidebar';
 export { Spinner } from './spinner/spinner';
