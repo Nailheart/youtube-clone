@@ -14,6 +14,7 @@ type SearchRequestDto = {
   maxResults?: number;
   order?: Order;
   pageToken?: string;
+  type?: 'channel' | 'playlist' | 'video';
 }
 
 export { type SearchRequestDto };
