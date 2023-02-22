@@ -11,7 +11,7 @@ import {
 import { 
   useEffect,
   useLoaderData,
-  useLocation,
+  useParams,
   useRef,
   useState
 } from 'hooks/hooks';
@@ -42,7 +42,7 @@ import {
 import styles from './styles.module.scss';
 
 const VideoDetails = () => {
-  const { pathname } = useLocation();
+  const { id } = useParams();
   const [isShowDescription, setIsShowDescription] = useState(false);
   const {
     videoDetailsData,
@@ -97,7 +97,7 @@ const VideoDetails = () => {
     timeLinks.forEach(link => {
       link.addEventListener('click', setVideoTime);
     });
-  }, [pathname]);
+  }, [id]);
 
   return (
     <div className={styles.videoDetails}>
