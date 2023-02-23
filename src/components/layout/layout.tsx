@@ -4,8 +4,8 @@ import { Header, Sidebar, Outlet, ScrollRestoration } from 'components/common/co
 import styles from './styles.module.scss';
 
 const Layout = () => {
-  const location = useLocation();
-  const sidebarIsModal = location.pathname.split('/').includes('video');
+  const { pathname } = useLocation();
+  const sidebarIsModal = pathname.split('/').includes('video');
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
   const contentFullWidth = sidebarIsModal ? styles.contentFullWidth : !sidebarIsOpen && styles.contentFullWidth;
 

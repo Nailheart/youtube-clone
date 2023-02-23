@@ -12,28 +12,28 @@ type Props = {
 };
 
 const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) => {
-  const handleToggleSidebar = () => {
-    toggleSidebar(!sidebarIsOpen);
-  };
+  const handleToggleSidebar = () => toggleSidebar(!sidebarIsOpen);
+  const handleCloseSidebar = () => toggleSidebar(false);
 
-  const handleCloseSidebar = () => {
-    toggleSidebar(false);
-  };
-
-  return sidebarIsModal ? (
-    <div className={clsx(styles.modalWrapper, !sidebarIsOpen && styles.closeModal)}>
-      <aside className={styles.modalSidebar}>
+  return (
+    <aside 
+      className={clsx(
+        styles.sidebar,
+        sidebarIsModal && styles.sidebarModal,
+        !sidebarIsOpen && styles.sidebarClose,
+      )}
+    >
+      <div className={styles.sidebarWrapper}>
         <div className={styles.logoWrapper}>
           <button  className={styles.toggle} onClick={handleToggleSidebar}>
             <Icon name="burger" />
           </button>
-
           <Link to={AppRoute.ROOT}>
             <Icon name="logo" width={90} height={20} />
           </Link>
         </div>
 
-        <div className={styles.modalContent}>
+        <div className={styles.sidebarContent}>
           {NAVIGATION_ITEMS.map((item, index) => (
             <div key={index} className={styles.navigationGroup}>
               {Boolean(item.navigationGroup) && (
@@ -55,40 +55,15 @@ const Sidebar: FC<Props> = ({ sidebarIsOpen, sidebarIsModal, toggleSidebar }) =>
               </ul>
             </div>
           ))}
-          <div className={styles.copyright}>© 2022 Google LLC</div>
+          <div className={styles.copyright}>
+            <span>© 2022 Google LLC</span>
+            <span className={styles.createdBy}>
+              Created by <a href="https://github.com/Nailheart" target="_blank" rel="noreferrer">Nailheart</a>
+            </span>
+          </div>
         </div>
-      </aside>
-      <div className={styles.overlay} onClick={handleCloseSidebar} />
-    </div>
-  ) : (
-    <aside className={clsx(styles.sidebar, !sidebarIsOpen && styles.sidebarHidden)}>
-      {NAVIGATION_ITEMS.map((item, index) => (
-        <div key={index} className={styles.navigationGroup}>
-          {Boolean(item.navigationGroup) && (
-            <h3 className={styles.groupTitle}>{item.navigationGroup}</h3>
-          )}
-          
-          <ul className={styles.links}>
-            {item.links.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  className={({ isActive }) => clsx(styles.link, isActive && styles.linkActive)}
-                  to={item.path}
-                >
-                  <Icon name={item.icon} />
-                  <span className={styles.linkText}>{item.title}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <div className={styles.copyright}>
-        <span>© 2022 Google LLC</span>
-        <span className={styles.createdBy}>
-          Created by <a href="https://github.com/Nailheart" target="_blank" rel="noreferrer">Nailheart</a>
-        </span>
       </div>
+      <div className={styles.overlay} onClick={handleCloseSidebar} />
     </aside>
   );
 };

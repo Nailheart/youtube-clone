@@ -21,7 +21,7 @@ const Header: FC<Props> = ({ sidebarIsOpen, toggleSidebar }) => {
           <Icon name="burger" />
         </button>
 
-        <Link to={AppRoute.ROOT}>
+        <Link className={styles.logo} to={AppRoute.ROOT}>
           <Icon name="logo" width={90} height={20} />
         </Link>
       </div>

@@ -1,3 +1,5 @@
+@use "assets/scss/mixins" as *;
+
 .header {
   display: flex;
   align-items: center;
@@ -31,4 +33,10 @@
   &:hover,
   &:focus-visible { background-color: var(--color-light); }
   &:active { background-color: var(--color-grey-1); }
+
+  @include media-max(md) { margin-right: 0; }
+}
+
+.logo {
+  @include media-max(md) { display: none; }
 }

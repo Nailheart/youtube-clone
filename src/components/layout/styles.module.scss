@@ -16,4 +16,6 @@
   &FullWidth {
     margin-left: 0;
   }
+
+  @include media-max(md) { margin-left: 0; }
 }
