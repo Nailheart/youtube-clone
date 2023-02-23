@@ -26,6 +26,10 @@
       line-height: 1.25;
     }
   }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    &Horizontal { grid-template-columns: 1fr 1fr; }
+  }
 }
 
 .cardImg {

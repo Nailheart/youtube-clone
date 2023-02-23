@@ -2,13 +2,16 @@
 
 .videoDetails {
   display: grid;
-  grid-template-columns: 65% 1fr;
+  grid-template-columns: 65% 35%;
   align-items: flex-start;
   padding: 15px 24px 30px;
+
+  @include media-max(md) { grid-template-columns: 1fr; }
 }
 
 .container {
   margin-right: 24px;
+  @include media-max(md) { margin-right: 0; }
 }
 
 .playerWrapper {
@@ -69,6 +72,7 @@
 .buttons {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -157,4 +161,13 @@
 .comments {
   display: grid;
   row-gap: 16px;
+}
+
+.innerComments {
+  @include media-max(md) { display: none; }
+}
+
+.outsideComments {
+  margin-top: 24px;
+  @include media-min(md) { display: none; }
 }

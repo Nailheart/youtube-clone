@@ -10,8 +10,8 @@ type MatchMedia = {
 const queries = [
   '(min-width: 320px) and (max-width: 767px)',
   '(min-width: 768px) and (max-width: 991px)',
-  '(min-width: 992px) and (max-width: 1384px)',
-  '(min-width: 1385px)'
+  '(min-width: 992px) and (max-width: 1439px)',
+  '(min-width: 1440px)',
 ];
 
 const useMatchMedia = () => {

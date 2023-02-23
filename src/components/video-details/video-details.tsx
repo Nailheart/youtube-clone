@@ -183,28 +183,30 @@ const VideoDetails = () => {
             onClick={toggleDescription}
           />
         </div>
-        <Suspense fallback={<Spinner />}>
-          <Await resolve={commentsData}>
-            {(comments: VideoCommentsResponseDto) => (
-              <>
-                {Boolean(comments.items) && (
-                  <div className={styles.comments}>
-                    {comments.items.map((comment: VideoCommentResponseDto) => (
-                      <CommentCard
-                        key={comment.id}
-                        img={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
-                        text={comment.snippet.topLevelComment.snippet.textDisplay}
-                        authorName={comment.snippet.topLevelComment.snippet.authorDisplayName}
-                        likeCount={comment.snippet.topLevelComment.snippet.likeCount}
-                        publishTime={comment.snippet.topLevelComment.snippet.publishedAt}
-                      />
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
-          </Await>
-        </Suspense>
+        <div className={styles.innerComments}>
+          <Suspense fallback={<Spinner />}>
+            <Await resolve={commentsData}>
+              {(comments: VideoCommentsResponseDto) => (
+                <>
+                  {Boolean(comments.items) && (
+                    <div className={styles.comments}>
+                      {comments.items.map((comment: VideoCommentResponseDto) => (
+                        <CommentCard
+                          key={comment.id}
+                          img={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
+                          text={comment.snippet.topLevelComment.snippet.textDisplay}
+                          authorName={comment.snippet.topLevelComment.snippet.authorDisplayName}
+                          likeCount={comment.snippet.topLevelComment.snippet.likeCount}
+                          publishTime={comment.snippet.topLevelComment.snippet.publishedAt}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
       <div className={styles.suggestedVideos}>
         <Suspense fallback={<Spinner />}>
@@ -227,6 +229,30 @@ const VideoDetails = () => {
                     isHorizontal
                   />
                 ))}
+              </>
+            )}
+          </Await>
+        </Suspense>
+      </div>
+      <div className={styles.outsideComments}>
+        <Suspense fallback={<Spinner />}>
+          <Await resolve={commentsData}>
+            {(comments: VideoCommentsResponseDto) => (
+              <>
+                {Boolean(comments.items) && (
+                  <div className={styles.comments}>
+                    {comments.items.map((comment: VideoCommentResponseDto) => (
+                      <CommentCard
+                        key={comment.id}
+                        img={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
+                        text={comment.snippet.topLevelComment.snippet.textDisplay}
+                        authorName={comment.snippet.topLevelComment.snippet.authorDisplayName}
+                        likeCount={comment.snippet.topLevelComment.snippet.likeCount}
+                        publishTime={comment.snippet.topLevelComment.snippet.publishedAt}
+                      />
+                    ))}
+                  </div>
+                )}
               </>
             )}
           </Await>
