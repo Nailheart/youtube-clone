@@ -13,6 +13,11 @@ import styles from './styles.module.scss';
 const ChannelDetails = () => {
   const { id } = useParams();
   const { items } = useLoaderData() as ChannelDetailsResponseDto;
+
+  if (!items) {
+    return <h1 className={styles.errorTitle}>Can't find channel</h1>
+  }
+
   const channelDetails = items[0];
   const subscriberCount = getFormattedNumber(Number(channelDetails.statistics.subscriberCount));
 

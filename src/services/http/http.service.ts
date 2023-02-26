@@ -33,7 +33,7 @@ class Http {
         status: response.status,
       }));
 
-      throw new HttpError({ 
+      throw new HttpError({
         message: error.message,
         status: error.status,
       });

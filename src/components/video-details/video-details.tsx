@@ -7,6 +7,7 @@ import {
   ChannelDetailsResponseDto,
   VideoCommentsResponseDto,
   VideoCommentResponseDto,
+  SuggestedVideoResponseDto,
 } from 'common/types/types';
 import { 
   useEffect,
@@ -58,12 +59,13 @@ const VideoDetails = () => {
   
   const refPlayer = useRef<ReactPlayer>(null);
   const video = videoDetailsData.items[0];
-  const channelDetails = channelDetailsData.items[0];
+  const channelDetails = Boolean(channelDetailsData.items) && channelDetailsData.items[0];
   const viewCount = video.statistics.viewCount
     ? getFormattedNumber(Number(video.statistics.viewCount))
-    : 'unknown';
+    : 'unknown'
   ;
-  const subscriberCount = getFormattedNumber(Number(channelDetails.statistics.subscriberCount));
+  const subscriberCount = channelDetails
+    && getFormattedNumber(Number(channelDetailsData.items[0].statistics.subscriberCount));
   const likeCount = getFormattedNumber(Number(video.statistics.likeCount));
 
   const toggleDescription = () => {
@@ -116,28 +118,30 @@ const VideoDetails = () => {
 
         <h2 className={styles.videoTitle}>{sanitizeHTML(video.snippet.title)}</h2>
         <div className={styles.info}>
-          <div className={styles.channelInfo}>
-            <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: channelDetails.id})}>
-              <img
-                className={styles.channelLogo}
-                src={
-                  channelDetails.snippet.thumbnails.high.url ??
-                  channelDetails.snippet.thumbnails.medium.url ??
-                  channelDetails.snippet.thumbnails.default.url
-                }
-                alt="Channel logo"
-              />
-            </Link>
-            
-            <div className={styles.channelDescription}>
-              <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: channelDetails.id})}>
-                <h3 className={styles.channelTitle}>{channelDetails.snippet.title}</h3>
+          {channelDetails && (
+            <div className={styles.channelInfo}>
+              <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: video.snippet.channelId})}>
+                <img
+                  className={styles.channelLogo}
+                  src={
+                    channelDetails.snippet.thumbnails.high.url ??
+                    channelDetails.snippet.thumbnails.medium.url ??
+                    channelDetails.snippet.thumbnails.default.url
+                  }
+                  alt="Channel logo"
+                />
               </Link>
-              <span className={styles.channelSubscriberCount}>{subscriberCount} subscribers</span>
+              
+              <div className={styles.channelDescription}>
+                <Link to={insertUrlParams(AppRoute.CHANNEL_ID, {id: video.snippet.channelId})}>
+                  <h3 className={styles.channelTitle}>{video.snippet.channelTitle}</h3>
+                </Link>
+                <span className={styles.channelSubscriberCount}>{subscriberCount} subscribers</span>
+              </div>
+              
+              <Button title="Subscribe" theme="secondary" />
             </div>
-            
-            <Button title="Subscribe" theme="secondary" />
-          </div>
+          )}
           <div className={styles.buttons}>
             <div className={styles.estimateButtons}>
               <Button
@@ -211,24 +215,28 @@ const VideoDetails = () => {
       <div className={styles.suggestedVideos}>
         <Suspense fallback={<Spinner />}>
           <Await resolve={suggestedVideosData}>
-            {(suggestedVideos: SuggestedVideosResponseDto,) => (
+            {(suggestedVideos: SuggestedVideosResponseDto) => (
               <>
-                {suggestedVideos.items.map(video => (
-                  <VideoCard
-                    key={video.id.videoId}
-                    videoId={video.id.videoId}
-                    channelId={video.snippet.channelId}
-                    img={
-                      video.snippet.thumbnails.high.url ??
-                      video.snippet.thumbnails.medium.url ??
-                      video.snippet.thumbnails.default.url
-                    }
-                    title={video.snippet.title}
-                    channelTitle={video.snippet.channelTitle}
-                    publishTime={video.snippet.publishedAt}
-                    isHorizontal
-                  />
-                ))}
+                {Boolean(suggestedVideos.items) && (
+                  <>
+                    {suggestedVideos.items.map((video: SuggestedVideoResponseDto) => (
+                      <VideoCard
+                        key={video.id.videoId}
+                        videoId={video.id.videoId}
+                        channelId={video.snippet.channelId}
+                        img={
+                          video.snippet.thumbnails.high.url ??
+                          video.snippet.thumbnails.medium.url ??
+                          video.snippet.thumbnails.default.url
+                        }
+                        title={video.snippet.title}
+                        channelTitle={video.snippet.channelTitle}
+                        publishTime={video.snippet.publishedAt}
+                        isHorizontal
+                      />
+                    ))}
+                  </>
+                )}
               </>
             )}
           </Await>
